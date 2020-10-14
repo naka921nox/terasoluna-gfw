@@ -19,8 +19,12 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.fail;
 import static org.terasoluna.gfw.common.message.StandardResultMessageType.DANGER;
+import static org.terasoluna.gfw.common.message.StandardResultMessageType.DARK;
 import static org.terasoluna.gfw.common.message.StandardResultMessageType.ERROR;
 import static org.terasoluna.gfw.common.message.StandardResultMessageType.INFO;
+import static org.terasoluna.gfw.common.message.StandardResultMessageType.LIGHT;
+import static org.terasoluna.gfw.common.message.StandardResultMessageType.PRIMARY;
+import static org.terasoluna.gfw.common.message.StandardResultMessageType.SECONDARY;
 import static org.terasoluna.gfw.common.message.StandardResultMessageType.SUCCESS;
 import static org.terasoluna.gfw.common.message.StandardResultMessageType.WARN;
 import static org.terasoluna.gfw.common.message.StandardResultMessageType.WARNING;
@@ -255,6 +259,54 @@ public class ResultMessagesTest {
                 "bar", "bb");
 
         assertThat(messages.getType(), is((ResultMessageType) WARNING));
+        assertThat(messages.getList(), is(Arrays.asList(msg1, msg2)));
+    }
+
+    @Test
+    public void testPrimary() {
+        ResultMessage msg1 = ResultMessage.fromCode("foo", "aa");
+        ResultMessage msg2 = ResultMessage.fromCode("bar", "bb");
+
+        ResultMessages messages = ResultMessages.primary().add("foo", "aa").add(
+                "bar", "bb");
+
+        assertThat(messages.getType(), is((ResultMessageType) PRIMARY));
+        assertThat(messages.getList(), is(Arrays.asList(msg1, msg2)));
+    }
+
+    @Test
+    public void testSecondary() {
+        ResultMessage msg1 = ResultMessage.fromCode("foo", "aa");
+        ResultMessage msg2 = ResultMessage.fromCode("bar", "bb");
+
+        ResultMessages messages = ResultMessages.secondary().add("foo", "aa")
+                .add("bar", "bb");
+
+        assertThat(messages.getType(), is((ResultMessageType) SECONDARY));
+        assertThat(messages.getList(), is(Arrays.asList(msg1, msg2)));
+    }
+
+    @Test
+    public void testLight() {
+        ResultMessage msg1 = ResultMessage.fromCode("foo", "aa");
+        ResultMessage msg2 = ResultMessage.fromCode("bar", "bb");
+
+        ResultMessages messages = ResultMessages.light().add("foo", "aa").add(
+                "bar", "bb");
+
+        assertThat(messages.getType(), is((ResultMessageType) LIGHT));
+        assertThat(messages.getList(), is(Arrays.asList(msg1, msg2)));
+    }
+
+    @Test
+    public void testDark() {
+        ResultMessage msg1 = ResultMessage.fromCode("foo", "aa");
+        ResultMessage msg2 = ResultMessage.fromCode("bar", "bb");
+
+        ResultMessages messages = ResultMessages.dark().add("foo", "aa").add(
+                "bar", "bb");
+
+        assertThat(messages.getType(), is((ResultMessageType) DARK));
         assertThat(messages.getList(), is(Arrays.asList(msg1, msg2)));
     }
 
